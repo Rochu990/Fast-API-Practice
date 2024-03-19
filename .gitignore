@@ -2,3 +2,6 @@ fastapi_tutorial/
 __pycache__/
 evn/
 jwt_auth_env/
+.mypy_cache
+.pytest_cache
+car_app_env/
