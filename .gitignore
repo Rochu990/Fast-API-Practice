@@ -1,3 +1,4 @@
 fastapi_tutorial/
 __pycache__/
 evn/
+jwt_auth_env/
