@@ -30,7 +30,7 @@ async def get_car_by_id(car_id: int):
 
 
 @app.put("/refuel_car/{car_id}")
-async def refue_car(car_id: int, fuel: int | None = Query(default=1)):
+async def refuel_car(car_id: int, fuel: int | None = Query(default=1)):
     return cars.refuel(car_id, fuel)
 
 

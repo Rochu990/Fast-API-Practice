@@ -21,3 +21,8 @@ class Car:
         if self.tank_fuel < 0:
             self.tank_fuel = 0
         return self.tank_fuel
+
+    def to_dict(self):
+        return {'combustion': self.combustion,
+                "tank_fuel": self.tank_fuel,
+                "max_fuel": self.max_fuel}

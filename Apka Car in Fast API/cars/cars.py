@@ -10,6 +10,7 @@ class Cars:
         car = self.repository.get(id)
         car = Car(**car)
         car.refuel(fuel)
+        self.repository.add(id, car.to_dict())
         return car
 
     def add(self, id: int, car: int) -> dict:
