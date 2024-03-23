@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Query
 from pydantic import BaseModel
-from repository import Repository
 
 from cars import Cars
+from repository import Repository
 
 app = FastAPI()
 
