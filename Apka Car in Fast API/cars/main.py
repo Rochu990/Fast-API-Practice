@@ -19,8 +19,6 @@ cars = Cars(repository)
 
 @app.post("/create_car/{car_id}")
 async def create_car(car_id: int, car: CarDetails):
-    # cars[car_id] = car
-    # return cars[car_id]
     return cars.add(car_id, car.dict())
 
 

@@ -1,4 +1,5 @@
 import uuid
+from exceptions import FuelException
 
 
 class Car:
@@ -11,8 +12,8 @@ class Car:
     def refuel(self, fuel: int) -> int:
         self.tank_fuel = self.tank_fuel + fuel
         if self.tank_fuel > self.max_fuel:
-            print("Próbujesz zatankować za dużo")
             self.tank_fuel = self.max_fuel
+            raise FuelException("Tank")
         return self.tank_fuel
 
     def drive(self, kilometers: int) -> int:
