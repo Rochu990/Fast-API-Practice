@@ -1,4 +1,6 @@
 from car import Car
+from typing import Tuple
+from car import Status
 
 
 class Cars:
@@ -6,12 +8,12 @@ class Cars:
     def __init__(self, repository):
         self.repository = repository
 
-    def refuel(self, id: int, fuel: int) -> dict:
+    def refuel(self, id: int, fuel: int) -> Tuple[Car, Status]:
         car = self.repository.get(id)
         car = Car(**car)
-        car.refuel(fuel)
+        result = car.refuel(fuel)
         self.repository.add(id, car.to_dict())
-        return car
+        return car, result
 
     def add(self, id: int, car: int) -> dict:
         return self.repository.add(id, car)

@@ -1,5 +1,11 @@
 import uuid
-from exceptions import FuelException
+import dataclasses
+
+
+@dataclasses.dataclass
+class Status:
+    succes: bool
+    msg: str
 
 
 class Car:
@@ -9,12 +15,12 @@ class Car:
         self.max_fuel = max_fuel
         self.id = uuid.uuid4()
 
-    def refuel(self, fuel: int) -> int:
+    def refuel(self, fuel: int) -> Status:
         self.tank_fuel = self.tank_fuel + fuel
         if self.tank_fuel > self.max_fuel:
             self.tank_fuel = self.max_fuel
-            raise FuelException("Tank")
-        return self.tank_fuel
+            return Status(False, "Za dużo paliwa")
+        return Status(True, "Zatankowano auto")
 
     def drive(self, kilometers: int) -> int:
         fuel = (kilometers / 100) * self.combustion
