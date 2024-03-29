@@ -4,4 +4,4 @@ evn/
 jwt_auth_env/
 .mypy_cache
 .pytest_cache
-car_app_env/
+car_app/

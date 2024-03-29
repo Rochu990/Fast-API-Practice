@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 
 from cars import Cars
@@ -9,7 +9,7 @@ app = FastAPI()
 
 class CarDetails(BaseModel):
     combustion: int = 10
-    tank_fuel: float = 10
+    tank_fuel: int = 10
     max_fuel: int = 20
 
 
@@ -38,4 +38,9 @@ async def refuel_car(car_id: int, fuel: int | None = Query(default=1)):
 
 @app.put("/drive/{car_id}")
 async def drive(car_id: int, kilometers: int | None = None):
-    return cars.drive(car_id, kilometers)
+    car, status = cars.drive(car_id, kilometers)
+    if status.succes:
+        return car, status.msg
+    else:
+        raise HTTPException(status_code=400, detail=status.msg)
+    

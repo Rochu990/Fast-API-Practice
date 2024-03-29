@@ -1,9 +1,14 @@
-import uuid
 import dataclasses
+import uuid
 
 
 @dataclasses.dataclass
-class Status:
+class FuelStatus:
+    succes: bool
+    msg: str
+
+@dataclasses.dataclass
+class DriveStatus:
     succes: bool
     msg: str
 
@@ -15,20 +20,21 @@ class Car:
         self.max_fuel = max_fuel
         self.id = uuid.uuid4()
 
-    def refuel(self, fuel: int) -> Status:
+    def refuel(self, fuel: int) -> FuelStatus:
         self.tank_fuel = self.tank_fuel + fuel
         if self.tank_fuel > self.max_fuel:
             self.tank_fuel = self.max_fuel
-            return Status(False, "Za dużo paliwa")
-        return Status(True, "Zatankowano auto")
+            return FuelStatus(False, "Próbujesz zatankować za dużo")
+        return FuelStatus(True, "Zatankowano auto")
 
-    def drive(self, kilometers: int) -> int:
+    def drive(self, kilometers: int) -> DriveStatus:
         fuel = (kilometers / 100) * self.combustion
         self.tank_fuel = self.tank_fuel - fuel
         if self.tank_fuel < 0:
             self.tank_fuel = 0
-        return self.tank_fuel
-
+            return DriveStatus(False, "Zabrakło paliwa")
+        return DriveStatus(True, "Dojechałeś do celu")
+    
     def to_dict(self):
         return {
             "combustion": self.combustion,
