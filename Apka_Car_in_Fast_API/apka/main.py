@@ -31,7 +31,7 @@ async def get_car_by_id(car_id: int):
 async def refuel_car(car_id: int, fuel: int | None = Query(default=1)):
     car, status = cars.refuel(car_id, fuel)
     if status.succes:
-        return car
+        return car.to_dict()
     else:
         raise HTTPException(status_code=400, detail=status.msg)
 
